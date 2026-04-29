@@ -2,14 +2,14 @@
 
 ### IN PROGRESS
 
-- [x] anti-passback (cf. https://github.com/uhppoted/uhppoted/issues/60)
-      - [x] `get-antipassback`
-      - [x] `set-antipassback`
-      - [x] Docker
+- [ ] 'first card' API (cf. https://github.com/uhppoted/uhppoted/issues/82)
+      - [x] API
       - [x] documentation
       - [x] CHANGELOG
       - [x] README
+      - [ ] Docker
 
+- [ ] Update Docker certificates
 - [ ] Remove startup warnings for missing encryption/signing/etc files if auth is not enabled.
 - [ ] Clean up Paho logging
 - [ ] MQTT v5

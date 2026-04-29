@@ -321,6 +321,54 @@ func (d *Device) SetKeypads(impl uhppoted.IUHPPOTED, request []byte) (any, error
 	return response, nil
 }
 
+func (d *Device) SetFirstCard(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
+	body := struct {
+		DeviceID  *uhppoted.DeviceID `json:"device-id"`
+		Door      *uint8             `json:"door"`
+		FirstCard *types.FirstCard   `json:"first-card"`
+	}{}
+
+	if response, err := unmarshal(request, &body); err != nil {
+		return response, err
+	}
+
+	if body.DeviceID == nil {
+		return common.MakeError(StatusBadRequest, "Invalid/missing controller ID", nil), fmt.Errorf("invalid/missing controller ID")
+	}
+
+	if body.Door == nil {
+		return common.MakeError(StatusBadRequest, "Invalid/missing door", nil), fmt.Errorf("invalid/missing door: %v", body.Door)
+	}
+
+	if *body.Door < 1 || *body.Door > 4 {
+		return common.MakeError(StatusBadRequest, "Invalid/missing door", nil), fmt.Errorf("invalid/missing door: %v", *body.Door)
+	}
+
+	if body.FirstCard == nil {
+		return common.MakeError(StatusBadRequest, "Invalid/missing 'first card'", nil), fmt.Errorf("invalid/missing 'first card': %v", body.FirstCard)
+	}
+
+	deviceID := uint32(*body.DeviceID)
+	door := *body.Door
+	firstcard := *body.FirstCard
+
+	if ok, err := impl.SetFirstCard(deviceID, door, firstcard); err != nil {
+		return common.MakeError(StatusInternalServerError, fmt.Sprintf("Could not set %v, door %v first card", *body.DeviceID, *body.Door), err), err
+	} else {
+		response := struct {
+			DeviceID uint32 `json:"device-id"`
+			Door     uint8  `json:"door"`
+			Ok       bool   `json:"ok"`
+		}{
+			DeviceID: deviceID,
+			Door:     door,
+			Ok:       ok,
+		}
+
+		return response, nil
+	}
+}
+
 func (d *Device) OpenDoor(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 	body := struct {
 		DeviceID *uhppoted.DeviceID `json:"device-id"`

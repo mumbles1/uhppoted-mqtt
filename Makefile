@@ -10,6 +10,30 @@ CLIENTID  ?= QWERTY54
 REPLYTO   ?= uhppoted/reply/97531
 DATETIME  = $(shell date "+%Y-%m-%d %H:%M:%S")
 
+define FIRST_CARD
+{
+  "message": {
+    "request": {
+      "request-id": "$(REQUESTID)",
+      "client-id": "$(CLIENTID)",
+      "reply-to": "$(REPLYTO)",
+      "device-id": $(SERIALNO),
+      "door": 3,
+      "first-card": {
+        "start-time": "08:30",
+        "end-time": "16:45",
+        "active-mode": "normally open",
+        "inactive-mode": "normally closed",
+        "weekdays": "Monday,Tuesday,Thursday,Saturday,Sunday"
+      }
+    }
+  }
+}
+endef
+
+export FIRST_CARD
+
+
 .DEFAULT_GOAL := test
 .PHONY: clean
 .PHONY: update
@@ -192,7 +216,7 @@ config: build
 	./bin/uhppoted-mqtt config
 
 run: build
-	./bin/uhppoted-mqtt run --log-level debug --console
+	./bin/uhppoted-mqtt run --log-level debug --config workdir/hivemq.conf --console
 
 get-devices:
 	mqtt publish --topic 'uhppoted/gateway/requests/devices:get' \
@@ -346,6 +370,9 @@ set-door-interlock:
                                                       "reply-to":   "$(REPLYTO)", \
                                                       "device-id":  $(SERIALNO), \
                                                       "interlock":  4 }}}'
+
+set-firstcard:
+	mqtt publish --topic 'uhppoted/gateway/requests/device/door/firstcard:set' --message "$$FIRST_CARD"
 
 activate-keypads:
 	mqtt publish --topic 'uhppoted/gateway/requests/device/door/keypads:set' \

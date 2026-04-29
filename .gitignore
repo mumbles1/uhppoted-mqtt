@@ -1,7 +1,7 @@
 .DS_Store
 bin
 dist
-runtime
+workdir
 go.work
 go.work.sum
 documentation/docker

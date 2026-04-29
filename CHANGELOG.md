@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### Added
+1. Added `set-firstcard` API function to set the 'first card' configuration for a controller door.
+
 ### Updated
 1. Updated to Go 1.26.
 2. Updated to _modern Go_ with `go fix`.
