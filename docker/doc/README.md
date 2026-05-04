@@ -8,7 +8,7 @@ basic version of _uhppoted-mqtt_:
 | Dockferfile   |                                    |
 | uhppoted-mqtt | Pre-built binary for Alpine Linux  |
 | uhppoted-conf | uhppoted-mqtt configuration file   |
-| _broker.pem_  | Sample MQTT broker certificate     |
+| _broker.cert_ | Sample MQTT broker certificate     |
 
 ## Building a Docker image
 
@@ -42,7 +42,7 @@ docker run --detach --name mqttd --rm uhppoted/mqtt
 ```
 ...
 # MQTT broker TLS certificate
-COPY broker.pem    /etc/uhppoted
+COPY broker.cert   /etc/uhppoted
 ...
 ```
 
@@ -50,7 +50,7 @@ COPY broker.pem    /etc/uhppoted
 ```
 ...
 mqtt.connection.broker = tls://192.168.1.100:8883
-mqtt.connection.broker.certificate = /etc/uhppoted/broker.pem
+mqtt.connection.broker.certificate = /etc/uhppoted/broker.cert
 ...
 ```
 

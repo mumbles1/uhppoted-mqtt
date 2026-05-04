@@ -1,7 +1,6 @@
 # Creating the server and client keys and certificates for the test docker HiveMQ
 
 - Ref. [HiveMQ: HowTo configure server-side TLS with HiveMQ and Keytool (self-signed)](https://www.hivemq.com/docs/hivemq/4.4/user-guide/howtos.html)
-
 - Ref. [stackoverflow: How to add subject alernative name to ssl certs?](https://stackoverflow.com/questions/8744607/how-to-add-subject-alernative-name-to-ssl-certs#8744717)
 
 ### Create server keystore and certificates

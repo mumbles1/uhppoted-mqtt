@@ -12,4 +12,4 @@ COPY uhppoted.conf /usr/local/etc/uhppoted
 WORKDIR /opt/uhppoted 
 COPY uhppoted-mqtt .
 
-ENTRYPOINT /opt/uhppoted/uhppoted-mqtt --debug --config /usr/local/etc/uhppoted/uhppoted.conf --console
+ENTRYPOINT ["/opt/uhppoted/uhppoted-mqtt", "--debug", "--config", "/usr/local/etc/uhppoted/uhppoted.conf", "--console"]

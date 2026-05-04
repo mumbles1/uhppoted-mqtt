@@ -60,8 +60,6 @@ Example:
 ```
 topic: uhppoted/gateway/requests/device:get
 
-topic: uhppoted/gateway/requests/device:get
-
 {
   "message": {
     "request": {
