@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/uhppoted/uhppoted-lib/kvs"
+	"codeberg.org/uhppoted/uhppoted-lib/kvs"
 )
 
 func TestValidateHOTPWithValidOTP(t *testing.T) {

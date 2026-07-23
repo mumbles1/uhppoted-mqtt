@@ -9,10 +9,10 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/uhppoted/uhppote-core/types"
-	api "github.com/uhppoted/uhppoted-lib/acl"
-	"github.com/uhppoted/uhppoted-lib/uhppoted"
-	"github.com/uhppoted/uhppoted-mqtt/common"
+	"codeberg.org/uhppoted/uhppoted-core/types"
+	api "codeberg.org/uhppoted/uhppoted-lib/acl"
+	"codeberg.org/uhppoted/uhppoted-lib/uhppoted"
+	"codeberg.org/uhppoted/uhppoted-mqtt/common"
 )
 
 var templates = struct {

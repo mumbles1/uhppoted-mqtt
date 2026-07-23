@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/uhppoted/uhppoted-lib/kvs"
-	"github.com/uhppoted/uhppoted-mqtt/log"
+	"codeberg.org/uhppoted/uhppoted-lib/kvs"
+	"codeberg.org/uhppoted/uhppoted-mqtt/log"
 )
 
 type Nonce struct {

@@ -10,9 +10,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/uhppoted/uhppote-core/types"
-	libos "github.com/uhppoted/uhppoted-lib/os"
-	lib "github.com/uhppoted/uhppoted-lib/uhppoted"
+	"codeberg.org/uhppoted/uhppoted-core/types"
+	libos "codeberg.org/uhppoted/uhppoted-lib/os"
+	lib "codeberg.org/uhppoted/uhppoted-lib/uhppoted"
 )
 
 type eventMap struct {

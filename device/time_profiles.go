@@ -3,9 +3,9 @@ package device
 import (
 	"fmt"
 
-	"github.com/uhppoted/uhppote-core/types"
-	"github.com/uhppoted/uhppoted-lib/uhppoted"
-	"github.com/uhppoted/uhppoted-mqtt/common"
+	"codeberg.org/uhppoted/uhppoted-core/types"
+	"codeberg.org/uhppoted/uhppoted-lib/uhppoted"
+	"codeberg.org/uhppoted/uhppoted-mqtt/common"
 )
 
 func (d *Device) GetTimeProfile(impl uhppoted.IUHPPOTED, request []byte) (any, error) {

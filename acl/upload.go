@@ -6,9 +6,9 @@ import (
 	"net/url"
 	"strings"
 
-	api "github.com/uhppoted/uhppoted-lib/acl"
-	"github.com/uhppoted/uhppoted-lib/uhppoted"
-	"github.com/uhppoted/uhppoted-mqtt/common"
+	api "codeberg.org/uhppoted/uhppoted-lib/acl"
+	"codeberg.org/uhppoted/uhppoted-lib/uhppoted"
+	"codeberg.org/uhppoted/uhppoted-mqtt/common"
 )
 
 func (a *ACL) Upload(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
@@ -44,7 +44,7 @@ func (a *ACL) Upload(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 	}
 
 	var w strings.Builder
-	if err := api.MakeTSV(acl, a.Devices, &w); err != nil {
+	if err := api.MakeTSV(acl, a.Devices, false, false, &w); err != nil {
 		return common.MakeError(StatusInternalServerError, "Error reformatting card access permissions", err), err
 	}
 

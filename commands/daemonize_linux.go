@@ -12,7 +12,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/uhppoted/uhppoted-lib/config"
+	"codeberg.org/uhppoted/uhppoted-lib/config"
 )
 
 var DAEMONIZE = Daemonize{
@@ -147,7 +147,7 @@ func (cmd *Daemonize) execute() error {
 
 	i := info{
 		Description:   "UHPPOTE UTO311-L0x access card controllers MQTT service/daemon ",
-		Documentation: "https://github.com/uhppoted/uhppoted-mqtt",
+		Documentation: "https://codeberg.org/uhppoted/uhppoted-mqtt",
 		Executable:    executable,
 		PID:           fmt.Sprintf("/var/uhppoted/%s.pid", SERVICE),
 		User:          "uhppoted",

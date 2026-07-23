@@ -17,7 +17,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/uhppoted/uhppoted-mqtt/log"
+	"codeberg.org/uhppoted/uhppoted-mqtt/log"
 )
 
 type keyset struct {

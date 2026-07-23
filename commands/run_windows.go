@@ -13,10 +13,10 @@ import (
 	"golang.org/x/sys/windows/svc"
 	"golang.org/x/sys/windows/svc/eventlog"
 
-	"github.com/uhppoted/uhppote-core/uhppote"
-	"github.com/uhppoted/uhppoted-lib/config"
-	filelogger "github.com/uhppoted/uhppoted-lib/eventlog"
-	"github.com/uhppoted/uhppoted-mqtt/log"
+	"codeberg.org/uhppoted/uhppoted-core/uhppote"
+	"codeberg.org/uhppoted/uhppoted-lib/config"
+	filelogger "codeberg.org/uhppoted/uhppoted-lib/eventlog"
+	"codeberg.org/uhppoted/uhppoted-mqtt/log"
 )
 
 type service struct {

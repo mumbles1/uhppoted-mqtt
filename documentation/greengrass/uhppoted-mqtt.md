@@ -11,7 +11,7 @@ sudo su uhppoted
 ```
 cd /opt/uhppoted
 
-curl -OL https://github.com/uhppoted/uhppoted-mqtt/releases/download/v0.8.3/uhppoted-mqtt_v0.8.3.tar.gz
+curl -OL https://codeberg.org/uhppoted/uhppoted-mqtt/releases/download/v0.8.3/uhppoted-mqtt_v0.8.3.tar.gz
 tar xvzf uhppoted-mqtt_v0.8.3.tar.gz
 
 mkdir uhppoted-mqtt
@@ -24,7 +24,7 @@ ln -s /opt/uhppoted/uhppoted-mqtt_v0.8.3/linux/uhppoted-mqtt uhppoted-mqtt
 ```
 cd /opt/uhppoted
 
-git clone https://github.com/uhppoted/uhppoted-mqtt
+git clone https://codeberg.org/uhppoted/uhppoted-mqtt
 cd uhppoted-mqtt
 make build
 ln -s /opt/uhppoted/uhppoted-mqtt/bin/uhppoted-mqtt uhppoted-mqtt

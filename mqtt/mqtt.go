@@ -12,13 +12,13 @@ import (
 	aws "github.com/aws/aws-sdk-go/aws/credentials"
 	paho "github.com/eclipse/paho.mqtt.golang"
 
-	"github.com/uhppoted/uhppote-core/uhppote"
-	"github.com/uhppoted/uhppoted-lib/uhppoted"
+	"codeberg.org/uhppoted/uhppoted-core/uhppote"
+	"codeberg.org/uhppoted/uhppoted-lib/uhppoted"
 
-	"github.com/uhppoted/uhppoted-mqtt/acl"
-	"github.com/uhppoted/uhppoted-mqtt/auth"
-	"github.com/uhppoted/uhppoted-mqtt/device"
-	"github.com/uhppoted/uhppoted-mqtt/log"
+	"codeberg.org/uhppoted/uhppoted-mqtt/acl"
+	"codeberg.org/uhppoted/uhppoted-mqtt/auth"
+	"codeberg.org/uhppoted/uhppoted-mqtt/device"
+	"codeberg.org/uhppoted/uhppoted-mqtt/log"
 )
 
 type MQTTD struct {

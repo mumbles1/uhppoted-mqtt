@@ -9,6 +9,7 @@
 1. Updated to Go 1.26.
 2. Updated to _modern Go_ with `go fix`.
 3. _docker-dev_ container now uses HiveMQ public MQTT broker.
+4. Migrated from _github.com/uhppoted/uhppoted-mqtt_ to _codeberg.org/uhppoted/uhppoted-mqtt_.
 
 
 ## [0.9.0](https://github.com/uhppoted/uhppoted-mqtt/releases/tag/v0.9.0) - 2026-01-27

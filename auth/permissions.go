@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/uhppoted/uhppoted-lib/kvs"
+	"codeberg.org/uhppoted/uhppoted-lib/kvs"
 )
 
 type Permissions struct {

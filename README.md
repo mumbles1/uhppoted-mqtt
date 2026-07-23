@@ -42,9 +42,9 @@ It also facilitates integration of access control with IoT systems based on e.g.
 
 ## Installation
 
-Executables for all the supported operating systems are packaged in the [releases](https://github.com/uhppoted/uhppoted-rest/releases):
+Executables for all the supported operating systems are packaged in the [releases](https://codeberg.org/uhppoted/uhppoted-mqtt/releases):
 
-The release tarballs contain the executables for all the operating systems - OS specific tarballs with all the _uhppoted_ components can be found in [uhpppoted](https://github.com/uhppoted/uhppoted/releases) releases.
+The release tarballs contain the executables for all the operating systems - OS specific tarballs with all the _uhppoted_ components can be found in [uhpppoted](https://codeberg.org/uhppoted/uhppoted/releases) releases.
 
 Installation is straightforward - download the archive and extract it to a directory of your choice. To install `uhppoted-mqttd` as a system service:
 ```
@@ -61,11 +61,11 @@ The `uhppoted-mqttd` service requires the following additional files:
 ### `uhppoted.conf`
 
 `uhppoted.conf` is the communal configuration file shared by all the `uhppoted` project modules and is (or will 
-eventually be) documented in [uhppoted](https://github.com/uhppoted/uhppoted). `uhppoted-mqttd` requires:
+eventually be) documented in [uhppoted](https://codeberg.org/uhppoted/uhppoted). `uhppoted-mqttd` requires:
 - the _MQTT_ section to define the configuration for the MQTT client connection and endpoint
 - the _devices_ section to resolve non-local controller IP addresses and door to controller door identities.
 
-A sample [uhppoted.conf](https://github.com/uhppoted/uhppoted/blob/main/runtime/simulation/405419896.conf) file
+A sample [uhppoted.conf](https://codeberg.org/uhppoted/uhppoted/blob/main/runtime/simulation/405419896.conf) file
 is included in the `uhppoted` distribution. Alternatively, a starter `uhppoted.conf` file can be created by executing:
 ```
 uhppoted-mqtt config > uhppoted.conf
@@ -73,7 +73,7 @@ uhppoted-mqtt config > uhppoted.conf
 
 ### Docker
 
-A public _Docker_ image is published to [ghcr.io](https://github.com/uhppoted?tab=packages&repo_name=uhppoted-mqtt). 
+A public _Docker_ image is published to [ghcr.io](https://codeberg.org/uhppoted?tab=packages&repo_name=uhppoted-mqtt). 
 
 The image is configured to use the `/usr/local/etc/uhppoted/uhppoted.conf` file for configuration information.
 
@@ -133,14 +133,14 @@ FROM ghcr.io/uhppoted/restd:latest
 Assuming you have `Go` and `make` installed:
 
 ```
-git clone https://github.com/uhppoted/uhppoted-mqtt.git
+git clone https://codeberg.org/uhppoted/uhppoted-mqtt.git
 cd uhppoted-mqtt
 make build
 ```
 
 If you prefer not to use `make`:
 ```
-git clone https://github.com/uhppoted/uhppoted-mqtt.git
+git clone https://codeberg.org/uhppoted/uhppoted-mqtt.git
 cd uhppoted-mqtt
 mkdir bin
 go build -trimpath -o bin ./...
@@ -155,12 +155,11 @@ The above commands build the `'uhppoted-mqtt` executable to the `bin` directory.
 
 | *Dependency*                                             | *Description*                                          |
 | -------------------------------------------------------- | ------------------------------------------------------ |
-| [uhppote-core](https://github.com/uhppoted/uhppote-core) | Device level API implementation                        |
-| [uhppoted-lib](https://github.com/uhppoted/uhppoted-lib) | common API for external applications                   |
 | github.com/eclipse/paho.mqtt.golang                      | Eclipse Paho MQTT client                               |
 | golang.org/x/sys                                         | Support for Windows services                           |
 | golang.org/x/net                                         | paho.mqtt.golang dependency                            |
 | github.com/gorilla/websocket                             | paho.mqtt.golang dependency                            |
+
 
 ## uhppoted-mqtt
 

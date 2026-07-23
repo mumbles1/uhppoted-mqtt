@@ -4,8 +4,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/uhppoted/uhppoted-lib/monitoring"
-	"github.com/uhppoted/uhppoted-mqtt/log"
+	"codeberg.org/uhppoted/uhppoted-lib/monitoring"
+	"codeberg.org/uhppoted/uhppoted-mqtt/log"
 )
 
 type SystemMonitor struct {

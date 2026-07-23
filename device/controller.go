@@ -3,8 +3,8 @@ package device
 import (
 	"fmt"
 
-	"github.com/uhppoted/uhppoted-lib/uhppoted"
-	"github.com/uhppoted/uhppoted-mqtt/common"
+	"codeberg.org/uhppoted/uhppoted-lib/uhppoted"
+	"codeberg.org/uhppoted/uhppoted-mqtt/common"
 )
 
 func (d *Device) GetDevices(impl uhppoted.IUHPPOTED, request []byte) (any, error) {

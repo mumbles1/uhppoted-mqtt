@@ -15,16 +15,16 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	paho "github.com/eclipse/paho.mqtt.golang"
 
-	"github.com/uhppoted/uhppote-core/uhppote"
-	"github.com/uhppoted/uhppoted-lib/config"
-	"github.com/uhppoted/uhppoted-lib/locales"
-	"github.com/uhppoted/uhppoted-lib/lockfile"
-	"github.com/uhppoted/uhppoted-lib/monitoring"
+	"codeberg.org/uhppoted/uhppoted-core/uhppote"
+	"codeberg.org/uhppoted/uhppoted-lib/config"
+	"codeberg.org/uhppoted/uhppoted-lib/locales"
+	"codeberg.org/uhppoted/uhppoted-lib/lockfile"
+	"codeberg.org/uhppoted/uhppoted-lib/monitoring"
 
-	"github.com/uhppoted/uhppoted-mqtt/acl"
-	"github.com/uhppoted/uhppoted-mqtt/auth"
-	"github.com/uhppoted/uhppoted-mqtt/log"
-	"github.com/uhppoted/uhppoted-mqtt/mqtt"
+	"codeberg.org/uhppoted/uhppoted-mqtt/acl"
+	"codeberg.org/uhppoted/uhppoted-mqtt/auth"
+	"codeberg.org/uhppoted/uhppoted-mqtt/log"
+	"codeberg.org/uhppoted/uhppoted-mqtt/mqtt"
 )
 
 type Run struct {

@@ -48,20 +48,24 @@ clean:
 	go clean
 	rm -rf bin
 
+push:
+	git push
+	git push bitbucket
+
 update:
-	go get -u github.com/uhppoted/uhppote-core@main
-	go get -u github.com/uhppoted/uhppoted-lib@main
+	go get -u codeberg.org/uhppoted/uhppoted-core@main
+	go get -u codeberg.org/uhppoted/uhppoted-lib@main
 	go mod tidy
 
 update-release:
-	go get -u github.com/uhppoted/uhppote-core
-	go get -u github.com/uhppoted/uhppoted-lib
+	go get -u codeberg.org/uhppoted/uhppoted-core
+	go get -u codeberg.org/uhppoted/uhppoted-lib
 	go mod tidy
 	go fix ./...
 
 update-all:
-	go get -u github.com/uhppoted/uhppote-core
-	go get -u github.com/uhppoted/uhppoted-lib
+	go get -u codeberg.org/uhppoted/uhppoted-core
+	go get -u codeberg.org/uhppoted/uhppoted-lib
 	go get -u github.com/aws/aws-sdk-go
 	go get -u github.com/eclipse/paho.mqtt.golang
 	go get -u github.com/gorilla/websocket
@@ -733,7 +737,7 @@ acl-download-s3:
 acl-download-http:
 	mqtt publish --topic 'uhppoted/gateway/requests/acl/acl:download' \
                  --message '{ "message": { "request": { \
-                                           "url": "https://github.com/uhppoted/uhppoted/blob/master/runtime/simulation/QWERTY54.tar.gz?raw=true", \
+                                           "url": "https://codeberg.org/uhppoted/uhppoted/blob/master/runtime/simulation/QWERTY54.tar.gz?raw=true", \
                                            "client-id": "QWERTY54", \
                                            "reply-to": "uhppoted\/reply\/97531", \
                                            "request-id": "AH173635G3" }}}'
@@ -764,7 +768,7 @@ acl-compare-http:
 	mqtt publish --topic 'uhppoted/gateway/requests/acl/acl:compare' \
                  --message '{ "message": { "request": { \
                                            "url": { \
-                                           	"acl": "https://github.com/uhppoted/uhppoted/blob/master/runtime/simulation/QWERTY54.tar.gz?raw=true", \
+                                           	"acl": "https://codeberg.org/uhppoted/uhppoted/blob/master/runtime/simulation/QWERTY54.tar.gz?raw=true", \
                                            	"report": "http://localhost:8080/upload/report.tar.gz" \
                                            	}, \
                                            "client-id": "QWERTY54", \

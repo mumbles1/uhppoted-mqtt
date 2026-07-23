@@ -15,13 +15,13 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 
-	"github.com/uhppoted/uhppote-core/types"
-	"github.com/uhppoted/uhppote-core/uhppote"
-	api "github.com/uhppoted/uhppoted-lib/acl"
-	"github.com/uhppoted/uhppoted-lib/uhppoted"
+	"codeberg.org/uhppoted/uhppoted-core/types"
+	"codeberg.org/uhppoted/uhppoted-core/uhppote"
+	api "codeberg.org/uhppoted/uhppoted-lib/acl"
+	"codeberg.org/uhppoted/uhppoted-lib/uhppoted"
 
-	"github.com/uhppoted/uhppoted-mqtt/auth"
-	"github.com/uhppoted/uhppoted-mqtt/log"
+	"codeberg.org/uhppoted/uhppoted-mqtt/auth"
+	"codeberg.org/uhppoted/uhppoted-mqtt/log"
 )
 
 const (

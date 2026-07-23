@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"net/url"
 
-	api "github.com/uhppoted/uhppoted-lib/acl"
-	"github.com/uhppoted/uhppoted-lib/uhppoted"
-	"github.com/uhppoted/uhppoted-mqtt/common"
+	api "codeberg.org/uhppoted/uhppoted-lib/acl"
+	"codeberg.org/uhppoted/uhppoted-lib/uhppoted"
+	"codeberg.org/uhppoted/uhppoted-mqtt/common"
 )
 
 func (a *ACL) Download(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
