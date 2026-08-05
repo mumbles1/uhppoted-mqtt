@@ -33,9 +33,12 @@ type MQTTD struct {
 	Permissions    auth.Permissions
 	AWS            AWS
 	ACL            ACL
-	EventMap       string
-	Protocol       string
-	Debug          bool
+	WithPINs       bool
+	WithFirstCard  bool
+
+	EventMap string
+	Protocol string
+	Debug    bool
 
 	client    paho.Client
 	interrupt chan os.Signal
@@ -133,6 +136,8 @@ func (mqttd *MQTTD) Run(u uhppote.IUHPPOTE, devices []uhppote.Device, authorized
 
 	dev := device.Device{
 		AuthorizedCards: authorized,
+		WithPINs:        mqttd.WithPINs,
+		WithFirstCard:   mqttd.WithFirstCard,
 	}
 
 	acl := acl.ACL{

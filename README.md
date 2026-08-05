@@ -1,5 +1,7 @@
+<!-- 
 ![build](https://github.com/uhppoted/uhppoted-mqtt/workflows/build/badge.svg)
 ![build](https://github.com/uhppoted/uhppoted-mqtt/workflows/ghcr/badge.svg)
+-->
 
 # uhppoted-mqtt
 
@@ -35,7 +37,7 @@ It also facilitates integration of access control with IoT systems based on e.g.
 
 ### Current Release
 
-**[v0.9.0](https://github.com/uhppoted/uhppoted-mqtt/releases/tag/v0.9.0) - 2026-01-27**
+**[v0.9.0](https://codeberg.org/uhppoted/uhppoted-mqtt/releases/tag/v0.9.0) - 2026-01-27**
 
 1. Updated to Go 1.25.
 

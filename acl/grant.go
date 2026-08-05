@@ -39,7 +39,7 @@ func (a *ACL) Grant(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 		return common.MakeError(StatusBadRequest, fmt.Sprintf("Invalid time profile (%v)", body.Profile), nil), fmt.Errorf("invalid time profile (%v)", body.Profile)
 	}
 
-	err := api.Grant(a.UHPPOTE, a.Devices, *body.CardNumber, *body.From, *body.To, body.Profile, body.Doors)
+	err := api.Grant(a.UHPPOTE, a.Devices, *body.CardNumber, *body.From, *body.To, body.Profile, body.Doors, api.FirstCardUnknown)
 	if err != nil {
 		return common.MakeError(StatusInternalServerError, err.Error(), nil), err
 	}

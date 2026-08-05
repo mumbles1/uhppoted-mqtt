@@ -44,7 +44,7 @@ func (a *ACL) Download(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 		infof("acl:download", "%v  Retrieved %v records", k, len(l))
 	}
 
-	rpt, errors := api.PutACL(a.UHPPOTE, *acl, false)
+	rpt, errors := api.PutACL(a.UHPPOTE, *acl, false, false, false)
 	if len(errors) > 0 {
 		err := fmt.Errorf("%v", errors)
 		return common.MakeError(StatusInternalServerError, "Error updating ACL", err), err

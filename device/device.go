@@ -17,6 +17,8 @@ const (
 
 type Device struct {
 	AuthorizedCards []string
+	WithPINs        bool
+	WithFirstCard   bool
 }
 
 func SetProtocol(version string) {

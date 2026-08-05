@@ -2,9 +2,10 @@ DEBUG   ?= --debug
 DIST    ?= development
 CODEGEN ?= ../uhppoted-codegen/bin/uhppoted-codegen
 DOCKER  ?= ghcr.io/uhppoted/mqttd:latest
+HOST    ?= broker.hivemq.com
 
 SERIALNO  ?= 405419896
-CARD      ?= 8165538
+CARD      ?= 10058400
 REQUESTID ?= AH173635G3
 CLIENTID  ?= QWERTY54
 REPLYTO   ?= uhppoted/reply/97531
@@ -222,6 +223,10 @@ config: build
 run: build
 	./bin/uhppoted-mqtt run --log-level debug --config workdir/hivemq.conf --console
 
+subscribe:
+	mqtt subscribe --host broker.hivemq.com --topic uhppoted/reply/# | jq . 
+
+
 get-devices:
 	mqtt publish --topic 'uhppoted/gateway/requests/devices:get' \
                  --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
@@ -417,15 +422,17 @@ get-cards:
                                                        "device-id": $(SERIALNO) }}}'
 
 get-card:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/card:get' \
-                 --message '{ "message": { "request": { "request-id":  "$(REQUESTID)", \
-                                                        "client-id":   "$(CLIENTID)", \
-                                                        "reply-to":    "$(REPLYTO)", \
-                                                        "device-id":   $(SERIALNO), \
-                                                        "card-number": $(CARD) }}}'
+	mqtt publish --host $(HOST) \
+               --topic 'uhppoted/gateway/requests/device/card:get' \
+               --message '{ "message": { "request": { "request-id":  "$(REQUESTID)", \
+                                                      "client-id":   "$(CLIENTID)", \
+                                                      "reply-to":    "$(REPLYTO)", \
+                                                      "device-id":   $(SERIALNO), \
+                                                      "card-number": $(CARD) }}}'
 
 put-card:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/card:put' \
+	mqtt publish --host $(HOST) \
+               --topic 'uhppoted/gateway/requests/device/card:put' \
                --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                       "client-id":  "$(CLIENTID)",  \
                                                       "reply-to":   "$(REPLYTO)",   \
@@ -434,7 +441,8 @@ put-card:
                                                                 "start-date":  "2023-01-01", \
                                                                 "end-date": "2023-12-31",    \
                                                                 "doors": { "1":true, "2":false, "3":55, "4":false }, \
-                                                                "PIN": 7531 } \
+                                                                "PIN": 7531, \
+                                                                "first-card": true } \
                                                     }}}'
 
 delete-card:

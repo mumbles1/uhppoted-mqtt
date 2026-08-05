@@ -3,8 +3,8 @@ module codeberg.org/uhppoted/uhppoted-mqtt
 go 1.26
 
 require (
-	codeberg.org/uhppoted/uhppoted-core v0.0.0-20260723154335-7d132936dee1
-	codeberg.org/uhppoted/uhppoted-lib v0.0.0-20260723173039-828de635eaf0
+	codeberg.org/uhppoted/uhppoted-core v0.9.1-0.20260730180352-a20ebb490510
+	codeberg.org/uhppoted/uhppoted-lib v0.9.1-0.20260805165543-030ec901d454
 	github.com/aws/aws-sdk-go v1.55.6
 	github.com/eclipse/paho.mqtt.golang v1.5.1
 	golang.org/x/sys v0.47.0

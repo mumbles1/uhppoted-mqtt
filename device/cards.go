@@ -86,7 +86,37 @@ func (d *Device) GetCard(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 		return common.MakeError(uhppoted.StatusInternalServerError, fmt.Sprintf("Could not retrieve card %v from %d", *body.CardNumber, *body.DeviceID), err), err
 	}
 
-	return response, nil
+	type card struct {
+		CardNumber uint32          `json:"card-number"`
+		From       types.Date      `json:"start-date"`
+		To         types.Date      `json:"end-date"`
+		Doors      map[uint8]uint8 `json:"doors"`
+		PIN        uint32          `json:"PIN,omitempty"`
+		FirstCard  bool            `json:"first-card,omitempty"`
+	}
+
+	c := card{
+		CardNumber: response.Card.CardNumber,
+		From:       response.Card.From,
+		To:         response.Card.To,
+		Doors:      response.Card.Doors,
+	}
+
+	if d.WithPINs {
+		c.PIN = uint32(response.Card.PIN)
+	}
+
+	if d.WithFirstCard {
+		c.FirstCard = response.Card.FirstCard.Door1 || response.Card.FirstCard.Door2 || response.Card.FirstCard.Door3 || response.Card.FirstCard.Door4
+	}
+
+	return struct {
+		DeviceID uint32 `json:"device-id"`
+		Card     card   `json:"card"`
+	}{
+		DeviceID: uint32(response.DeviceID),
+		Card:     c,
+	}, nil
 }
 
 func (d *Device) PutCard(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
@@ -96,6 +126,7 @@ func (d *Device) PutCard(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 		To         types.Date    `json:"end-date"`
 		Doors      map[uint8]any `json:"doors"`
 		PIN        uint32        `json:"PIN,omitempty"`
+		FirstCard  bool          `json:"first-card,omitempty"`
 	}
 
 	body := struct {
@@ -127,7 +158,6 @@ func (d *Device) PutCard(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 		From:       body.Card.From,
 		To:         body.Card.To,
 		Doors:      map[uint8]uint8{1: 0, 2: 0, 3: 0, 4: 0},
-		PIN:        types.PIN(body.Card.PIN),
 	}
 
 	for _, k := range []uint8{1, 2, 3, 4} {
@@ -149,6 +179,19 @@ func (d *Device) PutCard(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 		}
 	}
 
+	if d.WithPINs {
+		c.PIN = types.PIN(body.Card.PIN)
+	}
+
+	if d.WithFirstCard && body.Card.FirstCard {
+		c.FirstCard = types.FirstCardPrivileges{
+			Door1: c.Doors[1] != 0,
+			Door2: c.Doors[2] != 0,
+			Door3: c.Doors[3] != 0,
+			Door4: c.Doors[4] != 0,
+		}
+	}
+
 	if ok, err := impl.PutCard(deviceID, c); err != nil {
 		return common.MakeError(uhppoted.StatusInternalServerError,
 			fmt.Sprintf("Could not store card %v to %d", c.CardNumber, deviceID),
@@ -161,6 +204,16 @@ func (d *Device) PutCard(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 			fmt.Errorf("put-card for card %v:%v returned %v", deviceID, c.CardNumber, ok)
 	}
 
+	PIN := uint32(0)
+	if d.WithPINs {
+		PIN = uint32(c.PIN)
+	}
+
+	firstcard := false
+	if d.WithFirstCard {
+		firstcard = c.FirstCard.Door1 || c.FirstCard.Door2 || c.FirstCard.Door3 || c.FirstCard.Door4
+	}
+
 	response := struct {
 		DeviceID uhppoted.DeviceID `json:"device-id"`
 		Card     card              `json:"card"`
@@ -171,7 +224,8 @@ func (d *Device) PutCard(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 			From:       c.From,
 			To:         c.To,
 			Doors:      map[uint8]any{1: false, 2: false, 3: false, 4: false},
-			PIN:        uint32(c.PIN),
+			PIN:        PIN,
+			FirstCard:  firstcard,
 		},
 	}
 
