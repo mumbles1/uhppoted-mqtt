@@ -144,20 +144,21 @@ publish: release
 	                               --draft --prerelease --title "$(VERSION)-beta" --notes-file release-notes.md
 
 debug: build
-	mqtt publish --topic 'uhppoted/gateway/requests/device/time-profile:set' \
-                 --message '{ "message": { "request": { "request-id":  "$(REQUESTID)", \
-                                                        "client-id":   "$(CLIENTID)", \
-                                                        "reply-to":    "$(REPLYTO)", \
-                                                        "device-id":   $(SERIALNO), \
-                                                        "profile":     { "id": 29, \
-                                                                         "start-date": "2023-01-01", \
-                                                                         "end-date":   "2023-12-31", \
-                                                                         "weekdays":   "Monday,Wednesday,Thursday", \
-                                                                         "segments": [ \
-                                                                            { "start": "08:15", "end": "11:30" }, \
-                                                                            { "start": "14:05", "end": "17:45" }  \
-                                                                         ] } \
-                                                         }}}'
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/time-profile:set' \
+               --message '{ "message": { "request": { "request-id":  "$(REQUESTID)", \
+                                                      "client-id":   "$(CLIENTID)", \
+                                                      "reply-to":    "$(REPLYTO)", \
+                                                      "device-id":   $(SERIALNO), \
+                                                      "profile":     { "id": 29, \
+                                                                       "start-date": "2023-01-01", \
+                                                                       "end-date":   "2023-12-31", \
+                                                                       "weekdays":   "Monday,Wednesday,Thursday", \
+                                                                       "segments": [ \
+                                                                          { "start": "08:15", "end": "11:30" }, \
+                                                                          { "start": "14:05", "end": "17:45" }  \
+                                                                       ] } \
+                                                                     }}}'
 
 godoc:
 	godoc -http=:80	-index_interval=60s
@@ -228,21 +229,24 @@ subscribe:
 
 
 get-devices:
-	mqtt publish --topic 'uhppoted/gateway/requests/devices:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/devices:get' \
                  --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                         "client-id":  "$(CLIENTID)", \
                                                         "reply-to":   "$(REPLYTO)", \
                                                         "nonce":      5 }}}'
 
 get-devices-hotp:
-	mqtt publish --topic 'uhppoted/gateway/requests/devices:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/devices:get' \
                  --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                         "client-id":  "$(CLIENTID)", \
                                                         "reply-to":   "$(REPLYTO)", \
                                                         "hotp":       "586787" }}}'
 
 get-devices-rsa:
-	mqtt publish --topic 'uhppoted/gateway/requests/devices:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/devices:get' \
                  --message '{ "message": { "signature": "VXLQgzQOHnjIFW6UFftWBYtdwluM3M7nbQD6fjLdSkuk/L8ahLfHsIEPCQF9ofkqEGaBG2Dl6QJtqYF825z8dLPsxbQA1bgMrdbpiVKiS09Vn4ubONIGmShQKcuoZuAzgsVeNbCsDW2MhSq/f6W/DUlKmD9PwgxMkzeKUCjM8bQ=",\
                                            "request": { "request-id": "$(REQUESTID)", \
                                                         "client-id":  "$(CLIENTID)", \
@@ -250,14 +254,16 @@ get-devices-rsa:
                                                         "nonce":      8 }}}'
 
 get-device:
-	mqtt publish --topic 'uhppoted/gateway/requests/device:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device:get' \
                  --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                         "client-id":  "$(CLIENTID)", \
                                                         "reply-to":   "$(REPLYTO)", \
                                                         "device-id":  $(SERIALNO) }}}'
 
 get-device-hotp:
-	mqtt publish --topic 'uhppoted/gateway/requests/device:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device:get' \
                  --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                         "client-id":  "$(CLIENTID)", \
                                                         "reply-to":   "$(REPLYTO)", \
@@ -266,7 +272,8 @@ get-device-hotp:
                                                         "device-id":  $(SERIALNO) }}}'
 
 get-device-rsa:
-	mqtt publish --topic 'uhppoted/gateway/requests/device:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device:get' \
                  --message '{ "message": { "signature": "Dd6qGX0lvKA4i0jltpZry1K6hePCATuC0L1Pv7YkHtTNb9cqP+CI4lTOVlq5uWnKB0kVfqdLSGa6dsCRzzw3VFqojhC1ZG8rQtpg4iFno7S73g7O6jF/UEfQ6jHqwubrxcZI8W2P9bcO5f7UR6aiZt6+/nHJlPTLycQ1jlNeM3c=",\
                                            "request": { "request-id": "$(REQUESTID)", \
                                                         "client-id":  "$(CLIENTID)", \
@@ -274,7 +281,8 @@ get-device-rsa:
                                                         "nonce":      8, \
                                                         "device-id":  $(SERIALNO) }}}'
 get-device-encrypted:
-	mqtt publish --topic 'uhppoted/gateway/requests/device:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device:get' \
                  --message '{ "message": { "key":       "LRtq7KaKvsCP8VvaRXRsoc2+R5T8fhZ1x/cjFpknQmEbrtYmxe/5t1MSbRl2BxFRnEvCuGk6n64govDWcTvi58gU2Xn1XIQLOdBlg7Rk5bluEHdwM+nWRVqSBGTBe1UbvKbzeJ8Vm7jCFbYNVeBYDHRTgkfAnb4vpM/3KjYVDXlGLHO75ou16XPSNXyEvKwZUY5mKeAuS6O7igPkwkhdOgI4wUIBeqiKq5710pyOxitCv1b3CJvpo3lUIrwkGVNFn2fEUAEN3kCQUPpAxKeMOazEsRuQHJEm/thbFWIt0HrWE/XuqHtZZU17oAXiIgKioSUUJ6+cpXursNJWmI3nSQ==", \
                                            "signature": "G/3cEtzhZ+5iyms3sWYbh842ZbHYpJxKDrY8whkhlDmlXZis+P2l7PCfSH8l9hIeGvKUvIwL+wrkPkFwIZbNRJ0oYX9F1SXNVyEzjsKZZ6x4dJ57LnyK/YB8ygx/EBsESsSRo81QiBBD7XAHpKgVB/uqRTk9Tgq6J1YLYzyahv8=",\
                                            "request": "EJo5lNjfYl/aSBF2LodYrOpdWISCN4RfsFykVCu3K+OEeXI1r7QouxEwjLvZgsFUH2fK7qehUVyYtcoRdxdin0XS65t1P+Oc7dcrncyfHiJfRjbekEZqXpCG3Z02uTUtl4zss/Z8IAFxdjDmDB0NxsGALgCqhU70dioJgxeFqPyd3uHZi91dlvcWF2nf+Vb+6REEaSCCAEyQQ3BZ/NJUCQ==" \
@@ -282,7 +290,8 @@ get-device-encrypted:
                               "hmac": "5a0d5ffdafc73f8f386e6673faf93b77ca64b8e9ec665a770efacb64258bba27" }'
 
 get-device-encrypted-old:
-	mqtt publish --topic 'uhppoted/gateway/requests/device:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device:get' \
                  --message '{ "message": { "key":       "LRtq7KaKvsCP8VvaRXRsoc2+R5T8fhZ1x/cjFpknQmEbrtYmxe/5t1MSbRl2BxFRnEvCuGk6n64govDWcTvi58gU2Xn1XIQLOdBlg7Rk5bluEHdwM+nWRVqSBGTBe1UbvKbzeJ8Vm7jCFbYNVeBYDHRTgkfAnb4vpM/3KjYVDXlGLHO75ou16XPSNXyEvKwZUY5mKeAuS6O7igPkwkhdOgI4wUIBeqiKq5710pyOxitCv1b3CJvpo3lUIrwkGVNFn2fEUAEN3kCQUPpAxKeMOazEsRuQHJEm/thbFWIt0HrWE/XuqHtZZU17oAXiIgKioSUUJ6+cpXursNJWmI3nSQ==", \
                                            "iv":        "109A3994D8DF625FDA4811762E8758AC",\
                                            "signature": "G/3cEtzhZ+5iyms3sWYbh842ZbHYpJxKDrY8whkhlDmlXZis+P2l7PCfSH8l9hIeGvKUvIwL+wrkPkFwIZbNRJ0oYX9F1SXNVyEzjsKZZ6x4dJ57LnyK/YB8ygx/EBsESsSRo81QiBBD7XAHpKgVB/uqRTk9Tgq6J1YLYzyahv8=",\
@@ -292,14 +301,16 @@ get-device-encrypted-old:
 
 
 get-time:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/time:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/time:get' \
                  --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                         "client-id":  "$(CLIENTID)", \
                                                         "reply-to":   "$(REPLYTO)", \
                                                         "device-id":  $(SERIALNO) }}}'
 
 set-time:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/time:set' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/time:set' \
                  --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                         "client-id":  "$(CLIENTID)", \
                                                         "reply-to":   "$(REPLYTO)", \
@@ -307,14 +318,16 @@ set-time:
                                                         "date-time":  "$(DATETIME)" }}}'
 
 get-antipassback:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/antipassback:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/antipassback:get' \
                  --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                         "client-id":  "$(CLIENTID)", \
                                                         "reply-to":   "$(REPLYTO)", \
                                                         "device-id":  $(SERIALNO) }}}'
 
 set-antipassback:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/antipassback:set' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/antipassback:set' \
                  --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                         "client-id":  "$(CLIENTID)", \
                                                         "reply-to":   "$(REPLYTO)", \
@@ -322,7 +335,8 @@ set-antipassback:
                                                         "anti-passback":  "(1,3):(2,4)" }}}'
 
 restore-default-parameters:
-	mqtt publish --topic 'uhppoted/gateway/requests/device:reset' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device:reset' \
                --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                       "client-id":  "$(CLIENTID)", \
                                                       "reply-to":   "$(REPLYTO)", \
@@ -330,15 +344,17 @@ restore-default-parameters:
 
 
 get-door-delay:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/door/delay:get' \
-              --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
-                                                     "client-id":  "$(CLIENTID)", \
-                                                     "reply-to":   "$(REPLYTO)", \
-                                                     "device-id":  $(SERIALNO), \
-                                                     "door":       3 }}}'
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/door/delay:get' \
+               --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
+                                                      "client-id":  "$(CLIENTID)", \
+                                                      "reply-to":   "$(REPLYTO)", \
+                                                      "device-id":  $(SERIALNO), \
+                                                      "door":       3 }}}'
 
 set-door-delay:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/door/delay:set' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/door/delay:set' \
                --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                       "client-id":  "$(CLIENTID)", \
                                                       "reply-to":   "$(REPLYTO)", \
@@ -347,7 +363,8 @@ set-door-delay:
                                                       "delay":      8 }}}'
 
 get-door-control:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/door/control:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/door/control:get' \
                --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                       "client-id":  "$(CLIENTID)", \
                                                       "reply-to":   "$(REPLYTO)", \
@@ -355,7 +372,8 @@ get-door-control:
                                                       "door":       3 }}}'
 
 set-door-control:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/door/control:set' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/door/control:set' \
               --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                      "client-id":  "$(CLIENTID)", \
                                                      "reply-to":   "$(REPLYTO)", \
@@ -364,7 +382,8 @@ set-door-control:
                                                      "control":    "normally closed" }}}'
 
 set-door-passcodes:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/door/passcodes:set' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/door/passcodes:set' \
               --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                      "client-id":  "$(CLIENTID)", \
                                                      "reply-to":   "$(REPLYTO)", \
@@ -373,7 +392,8 @@ set-door-passcodes:
                                                      "passcodes":  [12345,0,99999,54321] }}}'
 
 set-door-interlock:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/door/interlock:set' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/door/interlock:set' \
                --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                       "client-id":  "$(CLIENTID)", \
                                                       "reply-to":   "$(REPLYTO)", \
@@ -381,10 +401,12 @@ set-door-interlock:
                                                       "interlock":  4 }}}'
 
 set-firstcard:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/door/firstcard:set' --message "$$FIRST_CARD"
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/door/firstcard:set' --message "$$FIRST_CARD"
 
 activate-keypads:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/door/keypads:set' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/door/keypads:set' \
                --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                       "client-id":  "$(CLIENTID)", \
                                                       "reply-to":   "$(REPLYTO)", \
@@ -393,7 +415,8 @@ activate-keypads:
                                                       }}}'
 
 record-special-events:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/special-events:set' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/special-events:set' \
                  --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                         "client-id":  "$(CLIENTID)", \
                                                         "reply-to":   "$(REPLYTO)", \
@@ -401,13 +424,15 @@ record-special-events:
                                                         "enabled":    true }}}'
 
 get-status:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/status:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/status:get' \
                  --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                         "client-id":  "$(CLIENTID)", \
                                                         "reply-to":   "$(REPLYTO)", \
                                                         "device-id":  $(SERIALNO) }}}'
 
-	mqtt publish --topic 'uhppoted/gateway/requests/device/status:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/status:get' \
                  --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                         "client-id":  "$(CLIENTID)", \
                                                         "reply-to":   "$(REPLYTO)", \
@@ -415,7 +440,8 @@ get-status:
 
 
 get-cards:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/cards:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/cards:get' \
                --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                        "client-id": "$(CLIENTID)", \
                                                        "reply-to":  "$(REPLYTO)", \
@@ -446,7 +472,8 @@ put-card:
                                                     }}}'
 
 delete-card:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/card:delete' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/card:delete' \
                --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                       "client-id":  "$(CLIENTID)", \
                                                       "reply-to":   "$(REPLYTO)", \
@@ -454,14 +481,16 @@ delete-card:
                                                       "card-number": $(CARD) }}}'
 
 delete-cards:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/cards:delete' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/cards:delete' \
                --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                       "client-id":  "$(CLIENTID)", \
                                                       "reply-to":   "$(REPLYTO)", \
                                                       "device-id":  $(SERIALNO) }}}'
 
 get-time-profile:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/time-profile:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/time-profile:get' \
                  --message '{ "message": { "request": { "request-id":  "$(REQUESTID)", \
                                                         "client-id":   "$(CLIENTID)", \
                                                         "reply-to":    "$(REPLYTO)", \
@@ -469,7 +498,8 @@ get-time-profile:
                                                         "profile-id":  29 }}}'
 
 set-time-profile:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/time-profile:set' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/time-profile:set' \
                  --message '{ "message": { "request": { "request-id":  "$(REQUESTID)", \
                                                         "client-id":   "$(CLIENTID)", \
                                                         "reply-to":    "$(REPLYTO)", \
@@ -486,14 +516,16 @@ set-time-profile:
                                                          }}}'
 
 clear-time-profiles:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/time-profiles:delete'          \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/time-profiles:delete'          \
                  --message '{ "message": { "request": { "request-id":  "$(REQUESTID)", \
                                                         "client-id":   "$(CLIENTID)",  \
                                                         "reply-to":    "$(REPLYTO)",   \
                                                         "device-id":   $(SERIALNO) }}}'
 
 get-time-profiles:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/time-profiles:get'          \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/time-profiles:get'          \
                  --message '{ "message": { "request": { "request-id":  "$(REQUESTID)", \
                                                         "client-id":   "$(CLIENTID)",  \
                                                         "reply-to":    "$(REPLYTO)",   \
@@ -502,7 +534,8 @@ get-time-profiles:
                                                         "to":          254 }}}'
 
 set-time-profiles:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/time-profiles:set'          \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/time-profiles:set'          \
                  --message '{ "message": { "request": { "request-id":  "$(REQUESTID)", \
                                                         "client-id":   "$(CLIENTID)",  \
                                                         "reply-to":    "$(REPLYTO)",   \
@@ -545,7 +578,8 @@ set-time-profiles:
                                                          }}}'
 
 set-task-list:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/tasklist:set'               \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/tasklist:set'               \
                  --message '{ "message": { "request": { "request-id":  "$(REQUESTID)", \
                                                         "client-id":   "$(CLIENTID)",  \
                                                         "reply-to":    "$(REPLYTO)",   \
@@ -571,13 +605,15 @@ set-task-list:
                                                          }}}'
 
 get-events:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/events:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/events:get' \
                --message '{ "message": { "request": { "request-id": "$(REQUESTID)", \
                                                       "client-id":  "$(CLIENTID)", \
                                                       "reply-to":   "$(REPLYTO)", \
                                                       "device-id":  $(SERIALNO) }}}'
 
-	mqtt publish --topic 'uhppoted/gateway/requests/device/events:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/events:get' \
                --message '{ "message": { "request": { "request-id":"$(REQUESTID)", \
                                                       "client-id":"$(CLIENTID)", \
                                                       "reply-to":"$(REPLYTO)", \
@@ -585,35 +621,40 @@ get-events:
                                                       "count": 3 }}}'
 
 get-event:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/event:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/event:get' \
                --message '{ "message": { "request": { "request-id":"$(REQUESTID)", \
                                                       "client-id":"$(CLIENTID)", \
                                                       "reply-to":"$(REPLYTO)", \
                                                       "device-id":$(SERIALNO), \
                                                       "event-index": 50 }}}'
 
-	mqtt publish --topic 'uhppoted/gateway/requests/device/event:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/event:get' \
                --message '{ "message": { "request": { "request-id":"$(REQUESTID)", \
                                                       "client-id":"$(CLIENTID)", \
                                                       "reply-to":"$(REPLYTO)", \
                                                       "device-id":$(SERIALNO), \
                                                       "event-index": "first" }}}'
 
-	mqtt publish --topic 'uhppoted/gateway/requests/device/event:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/event:get' \
                --message '{ "message": { "request": { "request-id":"$(REQUESTID)", \
                                                       "client-id":"$(CLIENTID)", \
                                                       "reply-to":"$(REPLYTO)", \
                                                       "device-id":$(SERIALNO), \
                                                       "event-index": "last" }}}'
 
-	mqtt publish --topic 'uhppoted/gateway/requests/device/event:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/event:get' \
                --message '{ "message": { "request": { "request-id":"$(REQUESTID)", \
                                                       "client-id":"$(CLIENTID)", \
                                                       "reply-to":"$(REPLYTO)", \
                                                       "device-id":$(SERIALNO), \
                                                       "event-index": "current" }}}'
 
-	mqtt publish --topic 'uhppoted/gateway/requests/device/event:get' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/event:get' \
                --message '{ "message": { "request": { "request-id":"$(REQUESTID)", \
                                                       "client-id":"$(CLIENTID)", \
                                                       "reply-to":"$(REPLYTO)", \
@@ -621,7 +662,8 @@ get-event:
                                                       "event-index": "next" }}}'
 
 open-door:
-	mqtt publish --topic 'uhppoted/gateway/requests/device/door/lock:open' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/device/door/lock:open' \
                --message '{ "message": { "request": { "request-id":  "$(REQUESTID)", \
                                                       "client-id":   "$(CLIENTID)",  \
                                                       "reply-to":    "$(REPLYTO)",   \
@@ -630,15 +672,17 @@ open-door:
                                                       "door":        3 }}}'
 
 acl-show:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/card:show' \
-                 --message '{ "message": { "request": { \
-                                           "card-number": 8165538, \
-                                           "client-id": "QWERTY54", \
-                                           "reply-to": "uhppoted\/reply\/97531", \
-                                           "request-id": "AH173635G3" }}}'
+	mqtt publish --host $(HOST) \
+               --topic 'uhppoted/gateway/requests/acl/card:show' \
+               --message '{ "message": { "request": { \
+                                         "card-number": 10058400, \
+                                         "client-id": "QWERTY54", \
+                                         "reply-to": "uhppoted\/reply\/97531", \
+                                         "request-id": "AH173635G3" }}}'
 
 acl-grant:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/card:grant'    \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/card:grant'    \
                  --message '{ "message": { "request": {                \
                                            "card-number": 8165538,     \
                                            "start-date": "2023-01-01", \
@@ -647,7 +691,8 @@ acl-grant:
                                            "client-id": "QWERTY54",              \
                                            "reply-to": "uhppoted\/reply\/97531", \
                                            "request-id": "AH173635G3" }}}'
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/card:grant'    \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/card:grant'    \
                  --message '{ "message": { "request": {                \
                                            "card-number": 8165538,     \
                                            "start-date": "2023-01-01", \
@@ -659,7 +704,8 @@ acl-grant:
                                            "request-id": "AH173635G3" }}}'
 
 acl-revoke:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/card:revoke' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/card:revoke' \
                  --message '{ "message": { "request": { \
                                            "card-number": 8165538, \
                                            "start-date": "2023-01-01", \
@@ -670,7 +716,8 @@ acl-revoke:
                                            "request-id": "AH173635G3" }}}'
 
 acl-upload-file:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/acl:upload' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:upload' \
                  --message '{ "message": { "request": { \
                                            "url": "file://../runtime/uhppoted-mqtt/uhppoted.tar.gz", \
                                            "client-id": "QWERTY54", \
@@ -678,7 +725,8 @@ acl-upload-file:
                                            "request-id": "AH173635G3" }}}'
 
 acl-upload-s3:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/acl:upload' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:upload' \
                  --message '{ "message": { "request": { \
                                            "url": "s3://uhppoted-test/mqttd/uhppoted.tar.gz", \
                                            "client-id": "QWERTY54", \
@@ -686,7 +734,8 @@ acl-upload-s3:
                                            "request-id": "AH173635G3" }}}'
 
 acl-upload-http:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/acl:upload' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:upload' \
                  --message '{ "message": { "request": { \
                                            "url": "http://localhost:8080/upload/mqttd.tar.gz", \
                                            "client-id": "QWERTY54", \
@@ -694,7 +743,8 @@ acl-upload-http:
                                            "request-id": "AH173635G3" }}}'
 
 acl-download-file:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/acl:download' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:download' \
                  --message '{ "message": { "request": { \
                                            "url": "file://../runtime/uhppoted-mqtt/hogwarts.tar.gz", \
                                            "client-id": "QWERTY54", \
@@ -702,7 +752,8 @@ acl-download-file:
                                            "request-id": "AH173635G3" }}}'
 
 acl-download-tsv:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/acl:download' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:download' \
                  --message '{ "message": { "request": { \
                                            "url": "file://../runtime/uhppoted-mqtt/hogwarts.acl", \
                                            "mime-type": "text/tab-separated-values", \
@@ -711,7 +762,8 @@ acl-download-tsv:
                                            "request-id": "AH173635G3" }}}'
 
 acl-download-invalid-file:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/acl:download' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:download' \
                  --message '{ "message": { "request": { \
                                            "url": "file://../runtime/mqttd/hogwarts-invalid.tar.gz", \
                                            "client-id": "QWERTY54", \
@@ -719,7 +771,8 @@ acl-download-invalid-file:
                                            "request-id": "AH173635G3" }}}'
 
 acl-download-blank-file:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/acl:download' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:download' \
                  --message '{ "message": { "request": { \
                                            "url": "file://../runtime/mqttd/hogwarts-blank.tar.gz", \
                                            "client-id": "QWERTY54", \
@@ -727,7 +780,8 @@ acl-download-blank-file:
                                            "request-id": "AH173635G3" }}}'
 
 acl-download-empty-file:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/acl:download' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:download' \
                  --message '{ "message": { "request": { \
                                            "url": "file://../runtime/mqttd/hogwarts-empty.tar.gz", \
                                            "client-id": "QWERTY54", \
@@ -735,7 +789,8 @@ acl-download-empty-file:
                                            "request-id": "AH173635G3" }}}'
 
 acl-download-s3:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/acl:download' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:download' \
                  --message '{ "message": { "request": { \
                                            "url": "s3://uhppoted-test/mqttd/QWERTY54.tar.gz", \
                                            "client-id": "QWERTY54", \
@@ -743,7 +798,8 @@ acl-download-s3:
                                            "request-id": "AH173635G3" }}}'
 
 acl-download-http:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/acl:download' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:download' \
                  --message '{ "message": { "request": { \
                                            "url": "https://codeberg.org/uhppoted/uhppoted/blob/master/runtime/simulation/QWERTY54.tar.gz?raw=true", \
                                            "client-id": "QWERTY54", \
@@ -751,7 +807,8 @@ acl-download-http:
                                            "request-id": "AH173635G3" }}}'
 
 acl-compare-file:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/acl:compare' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:compare' \
                  --message '{ "message": { "request": { \
                                            "url": { \
                                               "acl": "file://../runtime/uhppoted-mqtt/hogwarts.tar.gz", \
@@ -762,7 +819,8 @@ acl-compare-file:
                                            "request-id": "AH173635G3" }}}'
 
 acl-compare-s3:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/acl:compare' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:compare' \
                  --message '{ "message": { "request": { \
                                            "url": { \
                                            	"acl": "s3://uhppoted-test/mqttd/QWERTY54.tar.gz", \
@@ -773,7 +831,8 @@ acl-compare-s3:
                                            "request-id": "AH173635G3" }}}'
 
 acl-compare-http:
-	mqtt publish --topic 'uhppoted/gateway/requests/acl/acl:compare' \
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:compare' \
                  --message '{ "message": { "request": { \
                                            "url": { \
                                            	"acl": "https://codeberg.org/uhppoted/uhppoted/blob/master/runtime/simulation/QWERTY54.tar.gz?raw=true", \
@@ -784,6 +843,9 @@ acl-compare-http:
                                            "request-id": "AH173635G3" }}}'
 
 delete-retained-messages:
-	mqtt publish --topic 'uhppoted/gateway/events' --message ''
-	mqtt publish --topic 'uhppoted/gateway/system' --message ''
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/events' --message ''
+
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/system' --message ''
 

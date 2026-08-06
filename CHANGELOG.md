@@ -4,6 +4,7 @@
 
 ### Added
 1. Added `set-firstcard` API function to set the 'first card' configuration for a controller door.
+2. Added (optional) _first-card_ field to ACL::show response.
 
 ### Updated
 1. Updated to Go 1.26.

@@ -141,12 +141,13 @@ func (mqttd *MQTTD) Run(u uhppote.IUHPPOTE, devices []uhppote.Device, authorized
 	}
 
 	acl := acl.ACL{
-		UHPPOTE:     u,
-		Devices:     devices,
-		RSA:         mqttd.Encryption.RSA,
-		Credentials: mqttd.AWS.Credentials,
-		Region:      mqttd.AWS.Region,
-		Verify:      mqttd.ACL.Verify,
+		UHPPOTE:       u,
+		Devices:       devices,
+		RSA:           mqttd.Encryption.RSA,
+		Credentials:   mqttd.AWS.Credentials,
+		Region:        mqttd.AWS.Region,
+		Verify:        mqttd.ACL.Verify,
+		WithFirstCard: mqttd.WithFirstCard,
 	}
 
 	d := dispatcher{

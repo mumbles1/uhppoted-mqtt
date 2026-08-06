@@ -37,12 +37,18 @@ func (a *ACL) Show(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 	}
 
 	for k, v := range acl {
-		response.Permissions = append(response.Permissions, Permission{
+		permission := Permission{
 			Door:      k,
 			StartDate: v.From,
 			EndDate:   v.To,
 			Profile:   v.Profile,
-		})
+		}
+
+		if a.WithFirstCard {
+			permission.FirstCard = v.FirstCard
+		}
+
+		response.Permissions = append(response.Permissions, permission)
 	}
 
 	return response, nil

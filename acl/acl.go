@@ -42,12 +42,13 @@ func (v Verification) String() string {
 }
 
 type ACL struct {
-	UHPPOTE     uhppote.IUHPPOTE
-	Devices     []uhppote.Device
-	RSA         *auth.RSA
-	Credentials *credentials.Credentials
-	Region      string
-	Verify      map[Verification]bool
+	UHPPOTE       uhppote.IUHPPOTE
+	Devices       []uhppote.Device
+	RSA           *auth.RSA
+	Credentials   *credentials.Credentials
+	Region        string
+	Verify        map[Verification]bool
+	WithFirstCard bool
 }
 
 type Permission struct {
@@ -55,6 +56,7 @@ type Permission struct {
 	StartDate types.Date `json:"start-date"`
 	EndDate   types.Date `json:"end-date"`
 	Profile   int        `json:"profile,omitempty"`
+	FirstCard bool       `json:"first-card,omitempty"`
 }
 
 type Permissions struct {
