@@ -32,7 +32,14 @@ var templates = struct {
 
 type Report struct {
 	DateTime types.DateTime
-	Diffs    map[uint32]api.Diff
+	Diffs    map[uint32]diff
+}
+
+type diff struct {
+	Unchanged []string
+	Updated   []string
+	Added     []string
+	Deleted   []string
 }
 
 func (a *ACL) Compare(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
@@ -93,7 +100,7 @@ func (a *ACL) Compare(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 	}
 
 	var w strings.Builder
-	if err := report(diff, templates.report, &w); err != nil {
+	if err := a.report(diff, templates.report, &w); err != nil {
 		return common.MakeError(StatusInternalServerError, "Error generating ACL compare report", err), err
 	}
 
@@ -139,15 +146,104 @@ func (a *ACL) Compare(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 	}, nil
 }
 
-func report(diff map[uint32]api.Diff, format string, w io.Writer) error {
+func (a *ACL) report(diffs map[uint32]api.Diff, format string, w io.Writer) error {
 	t, err := template.New("report").Parse(format)
 	if err != nil {
 		return err
 	}
 
+	permission := func(p uint8) string {
+		switch {
+		case p == 0:
+			return "N"
+
+		case p == 1:
+			return "Y"
+
+		case p >= 2 && p <= 254:
+			return fmt.Sprintf("%v", p)
+
+		default:
+			return "N"
+		}
+	}
+
+	date := func(d types.Date) string {
+		if d.IsZero() {
+			return fmt.Sprintf("%-10v", "-")
+		} else {
+			return fmt.Sprintf("%-10v", d)
+		}
+	}
+
+	stringify := func(card types.Card) string {
+		s := fmt.Sprintf("%-8v %v %v %v %v %v %v",
+			card.CardNumber,
+			date(card.From),
+			date(card.To),
+			permission(card.Doors[1]),
+			permission(card.Doors[2]),
+			permission(card.Doors[3]),
+			permission(card.Doors[4]))
+
+		if a.WithPINs {
+			if card.PIN == 0 || card.PIN > 999999 {
+				s = fmt.Sprintf("%v -", s)
+			} else {
+				s = fmt.Sprintf("%v %-6v", s, card.PIN)
+			}
+		}
+
+		if a.WithFirstCard {
+			if !a.WithPINs {
+				s = fmt.Sprintf("%v -", s)
+			}
+
+			if card.FirstCard.IsZero() {
+				s = fmt.Sprintf("%v -", s)
+			} else {
+				s = fmt.Sprintf("%v %v", s, card.FirstCard)
+			}
+		}
+
+		return s
+	}
+
+	data := map[uint32]diff{}
+
+	for k, v := range diffs {
+		unchanged := []string{}
+		updated := []string{}
+		added := []string{}
+		deleted := []string{}
+
+		for _, card := range v.Unchanged {
+			unchanged = append(unchanged, stringify(card))
+		}
+
+		for _, card := range v.Updated {
+			updated = append(updated, stringify(card))
+		}
+
+		for _, card := range v.Added {
+			added = append(added, stringify(card))
+		}
+
+		for _, card := range v.Deleted {
+			deleted = append(deleted, stringify(card))
+		}
+
+		data[k] = diff{
+			Unchanged: unchanged,
+			Updated:   updated,
+			Added:     added,
+			Deleted:   deleted,
+		}
+	}
+
 	rpt := Report{
 		DateTime: types.DateTime(time.Now()),
-		Diffs:    diff,
+		Diffs:    data,
 	}
 
 	return t.Execute(w, rpt)

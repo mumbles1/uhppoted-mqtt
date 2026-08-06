@@ -48,6 +48,7 @@ type ACL struct {
 	Credentials   *credentials.Credentials
 	Region        string
 	Verify        map[Verification]bool
+	WithPINs      bool
 	WithFirstCard bool
 }
 

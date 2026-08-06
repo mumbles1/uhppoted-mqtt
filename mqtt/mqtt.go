@@ -147,6 +147,7 @@ func (mqttd *MQTTD) Run(u uhppote.IUHPPOTE, devices []uhppote.Device, authorized
 		Credentials:   mqttd.AWS.Credentials,
 		Region:        mqttd.AWS.Region,
 		Verify:        mqttd.ACL.Verify,
+		WithPINs:      mqttd.WithPINs,
 		WithFirstCard: mqttd.WithFirstCard,
 	}
 

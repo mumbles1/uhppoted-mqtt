@@ -18,8 +18,9 @@
     - [x] ~~put-acl~~
     - [x] ~~acl::show~~
     - [x] acl::grant
-    - [ ] acl::compare
-    - [ ] acl::revoke
+    - [x] ~~acl::revoke~~
+    - [x] acl::compare
+        - **rethink pins**
     - [ ] acl::upload
     - [ ] acl::download
 

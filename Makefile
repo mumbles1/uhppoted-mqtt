@@ -814,8 +814,8 @@ acl-compare-file:
 	             --topic 'uhppoted/gateway/requests/acl/acl:compare' \
                  --message '{ "message": { "request": { \
                                            "url": { \
-                                              "acl": "file://../runtime/uhppoted-mqtt/hogwarts.tar.gz", \
-                                           	  "report": "file://../runtime/uhppoted-mqtt/report.tar.gz" \
+                                              "acl": "file://./workdir/hogwarts.tar.gz", \
+                                           	  "report": "file://./workdir/report.tar.gz" \
                                            	}, \
                                            "client-id": "QWERTY54", \
                                            "reply-to": "uhppoted\/reply\/97531", \
@@ -838,7 +838,7 @@ acl-compare-http:
 	             --topic 'uhppoted/gateway/requests/acl/acl:compare' \
                  --message '{ "message": { "request": { \
                                            "url": { \
-                                           	"acl": "https://codeberg.org/uhppoted/uhppoted/blob/master/runtime/simulation/QWERTY54.tar.gz?raw=true", \
+                                           	"acl": "https://codeberg.org/uhppoted/uhppoted-mqtt/blob/master/workdir/QWERTY54.tar.gz?raw=true", \
                                            	"report": "http://localhost:8080/upload/report.tar.gz" \
                                            	}, \
                                            "client-id": "QWERTY54", \
