@@ -17,6 +17,7 @@ func (a *ACL) Grant(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 		To         *types.Date `json:"end-date"`
 		Profile    int         `json:"profile"`
 		Doors      []string    `json:"doors"`
+		FirstCard  bool        `json:"first-card"`
 	}{}
 
 	if err := json.Unmarshal(request, &body); err != nil {
@@ -39,8 +40,17 @@ func (a *ACL) Grant(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 		return common.MakeError(StatusBadRequest, fmt.Sprintf("Invalid time profile (%v)", body.Profile), nil), fmt.Errorf("invalid time profile (%v)", body.Profile)
 	}
 
-	err := api.Grant(a.UHPPOTE, a.Devices, *body.CardNumber, *body.From, *body.To, body.Profile, body.Doors, api.FirstCardUnknown)
-	if err != nil {
+	grant := func() error {
+		if a.WithFirstCard && body.FirstCard {
+			return api.Grant(a.UHPPOTE, a.Devices, *body.CardNumber, *body.From, *body.To, body.Profile, body.Doors, api.FirstCardGranted)
+		} else if a.WithFirstCard {
+			return api.Grant(a.UHPPOTE, a.Devices, *body.CardNumber, *body.From, *body.To, body.Profile, body.Doors, api.FirstCardRevoked)
+		} else {
+			return api.Grant(a.UHPPOTE, a.Devices, *body.CardNumber, *body.From, *body.To, body.Profile, body.Doors, api.FirstCardUnknown)
+		}
+	}
+
+	if err := grant(); err != nil {
 		return common.MakeError(StatusInternalServerError, err.Error(), nil), err
 	}
 

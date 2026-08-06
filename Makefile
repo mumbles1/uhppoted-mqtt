@@ -682,26 +682,29 @@ acl-show:
 
 acl-grant:
 	mqtt publish --host $(HOST) \
-	             --topic 'uhppoted/gateway/requests/acl/card:grant'    \
-                 --message '{ "message": { "request": {                \
-                                           "card-number": 8165538,     \
-                                           "start-date": "2023-01-01", \
-                                           "end-date": "2023-12-31",   \
+	             --topic 'uhppoted/gateway/requests/acl/card:grant'      \
+               --message '{ "message": { "request": {                  \
+                                           "card-number": 10058400,    \
+                                           "start-date": "2026-01-01", \
+                                           "end-date": "2026-12-31",   \
                                            "doors": [ "Gryffindor", "Slytherin" ], \
-                                           "client-id": "QWERTY54",              \
-                                           "reply-to": "uhppoted\/reply\/97531", \
+                                           "first-card": true,                     \
+                                           "client-id": "QWERTY54",                \
+                                           "reply-to": "uhppoted\/reply\/97531",   \
                                            "request-id": "AH173635G3" }}}'
+
 	mqtt publish --host $(HOST) \
 	             --topic 'uhppoted/gateway/requests/acl/card:grant'    \
-                 --message '{ "message": { "request": {                \
-                                           "card-number": 8165538,     \
-                                           "start-date": "2023-01-01", \
-                                           "end-date": "2023-12-31",   \
-                                           "profile": 29,              \
-                                           "doors": [ "Dungeon" ], \
-                                           "client-id": "QWERTY54",              \
-                                           "reply-to": "uhppoted\/reply\/97531", \
-                                           "request-id": "AH173635G3" }}}'
+               --message '{ "message": { "request": {                \
+                                         "card-number": 10058400,    \
+                                         "start-date": "2026-01-01", \
+                                         "end-date": "2026-12-31",   \
+                                         "profile": 29,              \
+                                         "first-card": true,         \
+                                         "doors": [ "Dungeon" ],     \
+                                         "client-id": "QWERTY54",              \
+                                         "reply-to": "uhppoted\/reply\/97531", \
+                                         "request-id": "AH173635G3" }}}'
 
 acl-revoke:
 	mqtt publish --host $(HOST) \

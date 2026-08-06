@@ -4,7 +4,7 @@
 
 ### Added
 1. Added `set-firstcard` API function to set the 'first card' configuration for a controller door.
-2. Added (optional) _first-card_ field to ACL::show response.
+2. Added (optional) _first-card_ field to `acl-show` and `acl-grant` APIs.
 
 ### Updated
 1. Updated to Go 1.26.
@@ -12,7 +12,7 @@
 3. _docker-dev_ container now uses HiveMQ public MQTT broker.
 4. Migrated from _github.com/uhppoted/uhppoted-mqtt_ to _codeberg.org/uhppoted/uhppoted-mqtt_.
 5. Added `mqtt.PIN.enabled` and `mqtt.firstcard.enabled` to _uhppoted.conf_.
-6. Added (optional) first-card privileges to `get-card` and `put-card` APIs.
+6. Added (optional) _first-card_ privileges to `get-card` and `put-card` APIs.
 
 
 ## [0.9.0](https://github.com/uhppoted/uhppoted-mqtt/releases/tag/v0.9.0) - 2026-01-27

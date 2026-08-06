@@ -17,8 +17,8 @@
     - [x] ~~get-acl~~
     - [x] ~~put-acl~~
     - [x] ~~acl::show~~
+    - [x] acl::grant
     - [ ] acl::compare
-    - [ ] acl::grant
     - [ ] acl::revoke
     - [ ] acl::upload
     - [ ] acl::download
