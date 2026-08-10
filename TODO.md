@@ -9,7 +9,7 @@
       - [x] README
       - [ ] Docker
 
-- [ ] add first-card privilege to `get-card` and `put-card` (cf. https://codeberg.org/uhppoted/uhppoted/issues/3)
+- [x] add first-card privilege to `get-card` and `put-card` (cf. https://codeberg.org/uhppoted/uhppoted/issues/3)
     - [x] conf: withPIN
     - [x] conf: withFirstCard
     - [x] get-card
@@ -19,10 +19,9 @@
     - [x] ~~acl::show~~
     - [x] acl::grant
     - [x] ~~acl::revoke~~
-    - [x] acl::compare
-        - **rethink pins**
     - [x] acl::upload
-    - [ ] acl::download
+    - [x] acl::download
+    - [ ] acl::compare
 
 - [ ] Update Docker certificates
 - [ ] Remove startup warnings for missing encryption/signing/etc files if auth is not enabled.

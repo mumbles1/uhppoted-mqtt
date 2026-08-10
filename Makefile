@@ -749,7 +749,15 @@ acl-download-file:
 	mqtt publish --host $(HOST) \
 	             --topic 'uhppoted/gateway/requests/acl/acl:download' \
                  --message '{ "message": { "request": { \
-                                           "url": "file://../runtime/uhppoted-mqtt/hogwarts.tar.gz", \
+                                           "url": "file://./workdir/hogwarts.tar.gz", \
+                                           "client-id": "QWERTY54", \
+                                           "reply-to": "uhppoted\/reply\/97531", \
+                                           "request-id": "AH173635G3" }}}'
+acl-download-file-with-PIN-and-firstcard:
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:download' \
+                 --message '{ "message": { "request": { \
+                                           "url": "file://./workdir/hogwarts-PIN-and-firstcard.tar.gz", \
                                            "client-id": "QWERTY54", \
                                            "reply-to": "uhppoted\/reply\/97531", \
                                            "request-id": "AH173635G3" }}}'

@@ -1,6 +1,9 @@
 ### `get-card`
 
-Retrieves a card record from a controller.
+Retrieves a card record from a controller. The returned record will only include the card PIN and first-card privileges
+if enabled in _uhppoted.conf_:
+- `mqtt.PIN.enabled = true`
+- `mqtt.firstcard.enabled = true`
 
 
 ```

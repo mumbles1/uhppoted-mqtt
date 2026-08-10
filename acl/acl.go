@@ -140,7 +140,7 @@ func (a *ACL) fetch(tag, uri string, mimetype string) (*api.ACL, error) {
 		}
 	}
 
-	acl, _, err := api.ParseTSV(bytes.NewReader(tsv), a.Devices, true)
+	acl, _, err := api.ParseTSV(bytes.NewReader(tsv), a.Devices, true, a.WithPINs, a.WithFirstCard)
 	if err != nil {
 		return nil, err
 	}
