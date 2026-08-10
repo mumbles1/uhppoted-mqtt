@@ -33,6 +33,20 @@ The security can then be increased incrementally as required. The details are de
 - [Encryption](https://codeberg.org/uhppoted/uhppoted-mqtt/blob/main/documentation/commands/security.md#encryption)
 - [Nonce](https://codeberg.org/uhppoted/uhppoted-mqtt/blob/main/documentation/commands/security.md#nonce)
 
+## Card PINs
+
+Card PINs in card and ACL requests can optionally be enabled in the _uhppoted.conf_ configuration file:
+```
+mqtt.PIN.enabled = true
+```
+
+## First-card privileges
+
+First-card privileges in card and ACL requests can optionally be enabled in the _uhppoted.conf_ configuration file:
+```
+mqtt.firstcard.enabled = true
+```
+
 ## Command structure
 
 Each command comprises:

@@ -21,7 +21,7 @@
     - [x] ~~acl::revoke~~
     - [x] acl::compare
         - **rethink pins**
-    - [ ] acl::upload
+    - [x] acl::upload
     - [ ] acl::download
 
 - [ ] Update Docker certificates

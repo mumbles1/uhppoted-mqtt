@@ -24,6 +24,9 @@ aws_secret_access_key = FRE................................zuyqt
 
 ```
 
+The upload will not include card PINs or first-card privileges unless `mqtt.PIN.enabled` and `mqtt.firstcard.enabled` are enabled
+respectively in the _uhppoted.conf_ configuration file.
+
 
 ```
 Request:

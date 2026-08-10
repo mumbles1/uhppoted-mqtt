@@ -44,7 +44,7 @@ func (a *ACL) Upload(impl uhppoted.IUHPPOTED, request []byte) (any, error) {
 	}
 
 	var w strings.Builder
-	if err := api.MakeTSV(acl, a.Devices, false, false, &w); err != nil {
+	if err := api.MakeTSV(acl, a.Devices, a.WithPINs, a.WithFirstCard, &w); err != nil {
 		return common.MakeError(StatusInternalServerError, "Error reformatting card access permissions", err), err
 	}
 

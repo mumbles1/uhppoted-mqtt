@@ -722,7 +722,7 @@ acl-upload-file:
 	mqtt publish --host $(HOST) \
 	             --topic 'uhppoted/gateway/requests/acl/acl:upload' \
                  --message '{ "message": { "request": { \
-                                           "url": "file://../runtime/uhppoted-mqtt/uhppoted.tar.gz", \
+                                           "url": "file://./workdir/uhppoted.tar.gz", \
                                            "client-id": "QWERTY54", \
                                            "reply-to": "uhppoted\/reply\/97531", \
                                            "request-id": "AH173635G3" }}}'
