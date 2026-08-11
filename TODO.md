@@ -3,26 +3,8 @@
 ### IN PROGRESS
 
 - [x] Update Docker certificates
-
 - [x] 'first card' API (cf. https://codeberg.org/uhppoted/uhppoted/issues/2)
-      - [x] API
-      - [x] documentation
-      - [x] CHANGELOG
-      - [x] README
-
-- [x] add first-card privilege to `get-card` and `put-card` (cf. https://codeberg.org/uhppoted/uhppoted/issues/3)
-    - [x] conf: withPIN
-    - [x] conf: withFirstCard
-    - [x] get-card
-    - [x] put-card
-    - [x] get-acl
-    - [x] put-acl
-    - [x] acl::show
-    - [x] acl::grant
-    - [x] ~~acl::revoke~~
-    - [x] acl::upload
-    - [x] acl::download
-    - [x] acl::compare
+- [x] add first-card privilege to `get-card` and `put-card`(cf. https://codeberg.org/uhppoted/uhppoted/issues/3)
 
 - [ ] Remove startup warnings for missing encryption/signing/etc files if auth is not enabled.
 - [ ] Clean up Paho logging

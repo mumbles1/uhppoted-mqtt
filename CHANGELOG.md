@@ -13,7 +13,6 @@
 4. Migrated from _github.com/uhppoted/uhppoted-mqtt_ to _codeberg.org/uhppoted/uhppoted-mqtt_.
 5. Added `mqtt.PIN.enabled` and `mqtt.firstcard.enabled` to _uhppoted.conf_.
 6. Added (optional) _PIN_ and _first-card privileges_ to `get-card` and `put-card` APIs.
-7. Added (optional) _PIN_ and _first-card privileges_ to `ac-upload` API.
 
 
 ## [0.9.0](https://github.com/uhppoted/uhppoted-mqtt/releases/tag/v0.9.0) - 2026-01-27
