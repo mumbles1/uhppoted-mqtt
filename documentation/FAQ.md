@@ -30,15 +30,15 @@
     Because .. Apple. 
 
     `bsdtar` on MacOS automatically searches for extended attributes (like com.apple.provenance or resource forks) and
-    prepends a hidden AppleDouble header file into the archive stream to preserve them. Use the `--disable-copyfile`
-    command line option, e.g.:
+    prepends a hidden header file into the archive stream to preserve them. Use the `--disable-copyfile` command line
+    option, e.g.:
 
     ```
-     tar --disable-copyfile --owner=QWERTY54 --group=QWERTY54 -czvf hogwarts2.tar.gz hogwarts2.acl signature
+     tar --disable-copyfile --owner=QWERTY54 --group=QWERTY54 -czvf hogwarts.tar.gz hogwarts.acl signature
     ```
 
     Or alternatively set the `COPYFILE_DISABLE` environment variable:
 
     ```
-    COPYFILE_DISABLE=1 tar --owner=QWERTY54 --group=QWERTY54 -czvf hogwarts2.tar.gz hogwarts2.acl signature
+    COPYFILE_DISABLE=1 tar --owner=QWERTY54 --group=QWERTY54 -czvf hogwarts.tar.gz hogwarts.acl signature
     ```

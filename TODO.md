@@ -14,14 +14,14 @@
     - [x] conf: withFirstCard
     - [x] get-card
     - [x] put-card
-    - [x] ~~get-acl~~
-    - [x] ~~put-acl~~
-    - [x] ~~acl::show~~
+    - [x] get-acl
+    - [x] put-acl
+    - [x] acl::show
     - [x] acl::grant
     - [x] ~~acl::revoke~~
     - [x] acl::upload
     - [x] acl::download
-    - [ ] acl::compare
+    - [x] acl::compare
 
 - [ ] Update Docker certificates
 - [ ] Remove startup warnings for missing encryption/signing/etc files if auth is not enabled.

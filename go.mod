@@ -4,7 +4,7 @@ go 1.26
 
 require (
 	codeberg.org/uhppoted/uhppoted-core v0.9.1-0.20260730180352-a20ebb490510
-	codeberg.org/uhppoted/uhppoted-lib v0.9.1-0.20260810160944-5a7b8d090aa7
+	codeberg.org/uhppoted/uhppoted-lib v0.9.1-0.20260811151401-370952f4629a
 	github.com/aws/aws-sdk-go v1.55.6
 	github.com/eclipse/paho.mqtt.golang v1.5.1
 	golang.org/x/sys v0.47.0

@@ -4,8 +4,7 @@
 
 ### Added
 1. Added `set-firstcard` API function to set the 'first card' configuration for a controller door.
-2. Added (optional) _first-card_ field to `acl-show`, `acl-grant` and `acl-compare` APIs.
-3. Added (optional) _PIN_ field `acl-compare` APIs.
+2. Added (optional) _PIN_ and _first-card_ field to ACL APIs.
 
 ### Updated
 1. Updated to Go 1.26.

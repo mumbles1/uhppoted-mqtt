@@ -829,6 +829,40 @@ acl-compare-file:
                                            "reply-to": "uhppoted\/reply\/97531", \
                                            "request-id": "AH173635G3" }}}'
 
+acl-compare-file-PIN:
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:compare' \
+                 --message '{ "message": { "request": { \
+                                           "url": { \
+                                              "acl": "file://./workdir/hogwarts-PIN.tar.gz", \
+                                           	  "report": "file://./workdir/report.tar.gz" \
+                                           	}, \
+                                           "client-id": "QWERTY54", \
+                                           "reply-to": "uhppoted\/reply\/97531", \
+                                           "request-id": "AH173635G3" }}}'
+acl-compare-file-firstcard:
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:compare' \
+                 --message '{ "message": { "request": { \
+                                           "url": { \
+                                              "acl": "file://./workdir/hogwarts-firstcard.tar.gz", \
+                                           	  "report": "file://./workdir/report.tar.gz" \
+                                           	}, \
+                                           "client-id": "QWERTY54", \
+                                           "reply-to": "uhppoted\/reply\/97531", \
+                                           "request-id": "AH173635G3" }}}'
+acl-compare-file-PIN-firstcard:
+	mqtt publish --host $(HOST) \
+	             --topic 'uhppoted/gateway/requests/acl/acl:compare' \
+                 --message '{ "message": { "request": { \
+                                           "url": { \
+                                              "acl": "file://./workdir/hogwarts-PIN-and-firstcard.tar.gz", \
+                                           	  "report": "file://./workdir/report.tar.gz" \
+                                           	}, \
+                                           "client-id": "QWERTY54", \
+                                           "reply-to": "uhppoted\/reply\/97531", \
+                                           "request-id": "AH173635G3" }}}'
+
 acl-compare-s3:
 	mqtt publish --host $(HOST) \
 	             --topic 'uhppoted/gateway/requests/acl/acl:compare' \
