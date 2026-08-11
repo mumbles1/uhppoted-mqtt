@@ -1,7 +1,8 @@
 DEBUG   ?= --debug
 DIST    ?= development
 CODEGEN ?= ../uhppoted-codegen/bin/uhppoted-codegen
-DOCKER  ?= ghcr.io/uhppoted/mqttd:latest
+DOCKER  ?= uhppoted/mqttd:latest
+GHCR    ?= ghcr.io/uhppoted/mqttd:latest
 HOST    ?= broker.hivemq.com
 
 SERIALNO  ?= 405419896
@@ -163,7 +164,7 @@ debug: build
 godoc:
 	godoc -http=:80	-index_interval=60s
 
-docker: docker-dev docker-ghcr
+docker: docker-dev docker-dockerhub
 	cd docker && find . -name .DS_Store -delete && rm -f compose.zip && zip --recurse-paths compose.zip compose
 
 docker-dev: build
@@ -174,16 +175,33 @@ docker-dev: build
 	cp docker/dev/uhppoted.conf dist/docker/dev
 	cd dist/docker/dev && docker build --no-cache -f Dockerfile -t uhppoted/uhppoted-mqtt-dev .
 
+docker-dockerhub: build
+	rm -rf dist/docker/dockerhub/*
+	mkdir -p dist/docker/dockerhub
+	env GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -trimpath -o dist/docker/dockerhub ./...
+	cp docker/dockerhub/Dockerfile    dist/docker/dockerhub
+	cp docker/dockerhub/uhppoted.conf dist/docker/dockerhub
+	cd dist/docker/dockerhub && docker build --no-cache -f Dockerfile -t $(DOCKER) .
+
 docker-ghcr: build
 	rm -rf dist/docker/ghcr/*
 	mkdir -p dist/docker/ghcr
 	env GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -trimpath -o dist/docker/ghcr ./...
 	cp docker/ghcr/Dockerfile    dist/docker/ghcr
 	cp docker/ghcr/uhppoted.conf dist/docker/ghcr
-	cd dist/docker/ghcr && docker build --no-cache -f Dockerfile -t $(DOCKER) .
+	cd dist/docker/ghcr && docker build --no-cache -f Dockerfile -t $(GHCR) .
+
+docker-publish:
+	make docker-dockerhub DOCKER=uhppoted/mqttd:${VERSION}
+	docker images
+	docker login -u uhppoted && docker push uhppoted/mqttd:${VERSION}
 
 docker-run-dev:
 	docker run --publish 60001:60001/udp --name mqttd --rm uhppoted/uhppoted-mqtt-dev
+	sleep 1
+
+docker-run-dockerub:
+	docker run --publish 60001:60001/udp --mount source=uhppoted-mqtt,target=/usr/local/etc/uhppoted --name mqttd --rm uhppoted/mqttd
 	sleep 1
 
 docker-run-ghcr:

@@ -4,7 +4,7 @@ services:
   uhppoted-mqtt:
     container_name: uhppoted-mqtt
     restart: unless-stopped
-    image: ghcr.io/uhppoted/mqttd:latest
+    image: uhppoted/mqttd:latest
     volumes:
       - uhppoted:/usr/local/etc/uhppoted
     network_mode: "bridge"

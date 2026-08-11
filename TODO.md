@@ -2,12 +2,13 @@
 
 ### IN PROGRESS
 
-- [ ] 'first card' API (cf. https://codeberg.org/uhppoted/uhppoted/issues/2)
+- [x] Update Docker certificates
+
+- [x] 'first card' API (cf. https://codeberg.org/uhppoted/uhppoted/issues/2)
       - [x] API
       - [x] documentation
       - [x] CHANGELOG
       - [x] README
-      - [ ] Docker
 
 - [x] add first-card privilege to `get-card` and `put-card` (cf. https://codeberg.org/uhppoted/uhppoted/issues/3)
     - [x] conf: withPIN
@@ -23,7 +24,6 @@
     - [x] acl::download
     - [x] acl::compare
 
-- [ ] Update Docker certificates
 - [ ] Remove startup warnings for missing encryption/signing/etc files if auth is not enabled.
 - [ ] Clean up Paho logging
 - [ ] MQTT v5
